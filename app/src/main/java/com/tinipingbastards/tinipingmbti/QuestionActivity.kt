@@ -7,20 +7,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tinipingbastards.tinipingmbti.DBHelper  // DBHelper 클래스 경로
+import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
+import com.tinipingbastards.tinipingmbti.databinding.ActivityQuestionBinding
 
 class QuestionActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityQuestionBinding
 
     private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_question)
+
+        binding = ActivityQuestionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         dbHelper = DBHelper(this)
-
-        val tvQuestion: TextView = findViewById(R.id.tvQuestion)
-        val btnAnswer1: Button = findViewById(R.id.btnAnswer1)
-        val btnAnswer2: Button = findViewById(R.id.btnAnswer2)
 
         val cursor: Cursor? = dbHelper.readableDatabase.query(
             "questions",  // 테이블 이름
@@ -34,7 +35,7 @@ class QuestionActivity : AppCompatActivity() {
 
         cursor?.moveToFirst()
 
-        tvQuestion.text = cursor?.getString(0)
+        binding.tvQuestion.text = cursor?.getString(0)
 
 //        cursor?.let {
 //            if (it.moveToFirst()) {
