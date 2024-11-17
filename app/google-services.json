@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "503569031541",
+    "project_id": "tinipingmbti",
+    "storage_bucket": "tinipingmbti.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503569031541:android:b5e25c23e7120d1d72b33c",
+        "android_client_info": {
+          "package_name": "com.tinipingbastards.tinipingmbti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmS9TevFmy6ryihkeypE0wRnFueogK1ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
