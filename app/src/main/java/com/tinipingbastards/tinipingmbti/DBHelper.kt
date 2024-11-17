@@ -1,4 +1,4 @@
-package com.tinipingbastards.tinipingmbti.data  // 패키지 경로
+package com.tinipingbastards.tinipingmbti  // 패키지 경로
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -15,7 +15,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     private val context = context
 
     companion object {
-        private const val DATABASE_NAME = "mbti_text.db"  // 데이터베이스 파일 이름
+        private const val DATABASE_NAME = "mbti_test.db"  // 데이터베이스 파일 이름
         private const val DATABASE_PATH = "/data/data/com.tinipingbastards.tinipingmbti/databases/"  // 내부 저장소 경로
         private const val DATABASE_VERSION = 1  // 데이터베이스 버전
     }

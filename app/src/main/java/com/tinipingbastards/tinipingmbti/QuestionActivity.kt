@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tinipingbastards.tinipingmbti.data.DBHelper  // DBHelper 클래스 경로
+import com.tinipingbastards.tinipingmbti.DBHelper  // DBHelper 클래스 경로
 
 class QuestionActivity : AppCompatActivity() {
 
@@ -32,27 +32,31 @@ class QuestionActivity : AppCompatActivity() {
             "RANDOM() LIMIT 1"  // 랜덤으로 한 질문만 불러옴
         )
 
-        cursor?.let {
-            if (it.moveToFirst()) {
-                val question = it.getString(it.getColumnIndex("question_text"))
-                val answer1 = it.getString(it.getColumnIndex("option_1"))
-                val answer2 = it.getString(it.getColumnIndex("option_2"))
+        cursor?.moveToFirst()
 
-                tvQuestion.text = question_text
-                btnAnswer1.text = option_1
-                btnAnswer2.text = option_2
+        tvQuestion.text = cursor?.getString(0)
 
-
-
-                btnAnswer1.setOnClickListener {
-                    Toast.makeText(this, "답변 1 선택: $answer1", Toast.LENGTH_SHORT).show()
-                }
-
-                btnAnswer2.setOnClickListener {
-                    Toast.makeText(this, "답변 2 선택: $answer2", Toast.LENGTH_SHORT).show()
-                }
-            }
-            it.close()
-        }
+//        cursor?.let {
+//            if (it.moveToFirst()) {
+//                val question = it.getString(it.getColumnIndex("question_text"))
+//                val answer1 = it.getString(it.getColumnIndex("option_1"))
+//                val answer2 = it.getString(it.getColumnIndex("option_2"))
+//
+//                tvQuestion.text = question_text
+//                btnAnswer1.text = option_1
+//                btnAnswer2.text = option_2
+//
+//
+//
+//                btnAnswer1.setOnClickListener {
+//                    Toast.makeText(this, "답변 1 선택: $answer1", Toast.LENGTH_SHORT).show()
+//                }
+//
+//                btnAnswer2.setOnClickListener {
+//                    Toast.makeText(this, "답변 2 선택: $answer2", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            it.close()
+//        }
     }
 }

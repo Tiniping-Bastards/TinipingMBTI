@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding.startBtn.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
+
+            mediaPlayer.stop()
         }
 
         // 배경음악 재생
