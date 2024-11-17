@@ -20,7 +20,7 @@ class IntroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 인트로 비디오 재생
-        binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.Intro))
+        binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.intro))
         binding.videoView.start()
 
         // 인트로 비디오 누르면 메인화면으로 이동
