@@ -1,5 +1,6 @@
 package com.tinipingbastards.tinipingmbti
 
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.widget.Button
@@ -26,7 +27,7 @@ class QuestionActivity : AppCompatActivity() {
         // DB에서 질문 데이터를 가져옵니다.
         cursor = dbHelper.loadDatabase().query(
             "questions",  // 테이블 이름
-            arrayOf("question_text", "option_1", "option_2"),  // 가져올 컬럼
+            arrayOf("question_text","question_type", "option_1", "option_2"),  // 가져올 컬럼
             null,  // 조건 (없음)
             null,  // 조건 값 (없음)
             null,  // 그룹화 (없음)
@@ -64,7 +65,10 @@ class QuestionActivity : AppCompatActivity() {
         if (cursor?.moveToNext() == true) {
             updateUI()
         } else {
-            Toast.makeText(this, "모든 질문이 끝났습니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("RESULT", "ISTP") //이거는 result값이 없어서 대략 해놓은거고
+                                                         //나중에는 result 변수 지정해서 만들어야 한다.
+            startActivity(intent)
             finish()
         }
     }
