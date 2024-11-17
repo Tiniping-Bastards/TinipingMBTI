@@ -33,5 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         mediaPlayer.isLooping = true
         mediaPlayer.start()
+
+
+
     }
 }
