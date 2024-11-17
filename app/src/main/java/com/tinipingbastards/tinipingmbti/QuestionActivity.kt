@@ -79,6 +79,9 @@ class QuestionActivity : AppCompatActivity() {
             updateUI()
         } else {
             result = calculateResult()  // 결과를 계산하여 result에 저장
+
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show()
+
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("RESULT", result)
             startActivity(intent)
