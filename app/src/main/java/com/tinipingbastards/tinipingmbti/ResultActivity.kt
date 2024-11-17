@@ -26,7 +26,7 @@ class ResultActivity : AppCompatActivity() {
 
             val db = DBHelper(this).loadDatabase()
 
-            cursor = db.rawQuery("Select * From questions", null)
+            cursor = db.rawQuery("Select * From result", null)
 
             cursor?.moveToFirst()
 
