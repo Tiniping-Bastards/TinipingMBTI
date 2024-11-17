@@ -15,6 +15,15 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuestionBinding
     private lateinit var dbHelper: DBHelper
     private var cursor: Cursor? = null  // Cursor 객체를 클래스 레벨에서 선언
+    private var result: String = ""     // 최종 MBTI 결과를 저장할 변수
+    private var eCount: Int = 0         // "E" 선택 횟수
+    private var iCount: Int = 0         // "I" 선택 횟수
+    private var sCount: Int = 0         // "S" 선택 횟수
+    private var nCount: Int = 0         // "N" 선택 횟수
+    private var tCount: Int = 0         // "T" 선택 횟수
+    private var fCount: Int = 0         // "F" 선택 횟수
+    private var jCount: Int = 0         // "J" 선택 횟수
+    private var pCount: Int = 0         // "P" 선택 횟수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,20 +63,48 @@ class QuestionActivity : AppCompatActivity() {
             binding.btnAnswer1.text = cursor?.getString(2) // 옵션 1
             binding.btnAnswer2.text = cursor?.getString(3) // 옵션 2
         } else {
-            Toast.makeText(this, "모든 질문이 끝났습니다.", Toast.LENGTH_SHORT).show()
-            finish()
+            result = calculateResult()
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra("RESULT", result)  // 최종 결과를 Intent로 전달
+            startActivity(intent)
         }
     }
 
     private fun processAnswer(selectedOption: Int) {
+        val questionType = cursor?.getString(1)  // question_type
+
+        calculateAnswerResult(questionType, selectedOption)
+
         if (cursor?.moveToNext() == true) {
             updateUI()
         } else {
+            result = calculateResult()  // 결과를 계산하여 result에 저장
             val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("RESULT", "ISTP") //이거는 result값이 없어서 대략 해놓은거고
-                                                         // 나중에는 result 변수 지정해서 만들어야 한다.
+            intent.putExtra("RESULT", result)
             startActivity(intent)
         }
+    }
+    private fun calculateAnswerResult(question_type: String?, selectedOption: Int) {
+        when (question_type) {
+            "E" -> if (selectedOption == 1) eCount++ else iCount++
+            "I" -> if (selectedOption == 1) iCount++ else eCount++
+            "S" -> if (selectedOption == 1) sCount++ else nCount++
+            "N" -> if (selectedOption == 1) nCount++ else sCount++
+            "T" -> if (selectedOption == 1) tCount++ else fCount++
+            "F" -> if (selectedOption == 1) fCount++ else tCount++
+            "J" -> if (selectedOption == 1) jCount++ else pCount++
+            "P" -> if (selectedOption == 1) pCount++ else jCount++
+        }
+    }
+
+    private fun calculateResult(): String {
+        // 각 지표에 대해 더 많이 선택된 항목을 결과로 출력
+        val EOrI = if (eCount > iCount) "E" else "I"
+        val SOrN = if (sCount > nCount) "S" else "N"
+        val TOrF = if (tCount > fCount) "T" else "F"
+        val JOrP = if (jCount > pCount) "J" else "P"
+
+        return EOrI + SOrN + TOrF + JOrP
     }
 
     override fun onDestroy() {
