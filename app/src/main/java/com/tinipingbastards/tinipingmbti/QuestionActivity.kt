@@ -51,8 +51,8 @@ class QuestionActivity : AppCompatActivity() {
     private fun updateUI() {
         if (cursor != null && !cursor!!.isAfterLast) {
             binding.tvQuestion.text = cursor?.getString(0)  // 질문 텍스트
-            binding.btnAnswer1.text = cursor?.getString(1) // 옵션 1
-            binding.btnAnswer2.text = cursor?.getString(2) // 옵션 2
+            binding.btnAnswer1.text = cursor?.getString(2) // 옵션 1
+            binding.btnAnswer2.text = cursor?.getString(3) // 옵션 2
         } else {
             Toast.makeText(this, "모든 질문이 끝났습니다.", Toast.LENGTH_SHORT).show()
             finish()
@@ -60,16 +60,13 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun processAnswer(selectedOption: Int) {
-        Toast.makeText(this, "선택한 옵션: $selectedOption", Toast.LENGTH_SHORT).show()
-
         if (cursor?.moveToNext() == true) {
             updateUI()
         } else {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("RESULT", "ISTP") //이거는 result값이 없어서 대략 해놓은거고
-                                                         //나중에는 result 변수 지정해서 만들어야 한다.
+                                                         // 나중에는 result 변수 지정해서 만들어야 한다.
             startActivity(intent)
-            finish()
         }
     }
 
