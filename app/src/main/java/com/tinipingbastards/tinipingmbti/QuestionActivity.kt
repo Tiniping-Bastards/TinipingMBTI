@@ -24,7 +24,7 @@ class QuestionActivity : AppCompatActivity() {
         dbHelper = DBHelper(this)
 
         // DB에서 질문 데이터를 가져옵니다.
-        cursor = dbHelper.readableDatabase.query(
+        cursor = dbHelper.loadDatabase().query(
             "questions",  // 테이블 이름
             arrayOf("question_text", "option_1", "option_2"),  // 가져올 컬럼
             null,  // 조건 (없음)
