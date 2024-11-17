@@ -23,20 +23,20 @@ class ResultActivity : AppCompatActivity() {
 
             dbHelper = DBHelper(this)
 
-            cursor = dbHelper.loadDatabase().query(
-            "mbti_info",  // 테이블 이름
-            arrayOf("type", "description", "path"),  // 가져올 컬럼
-            null,  // 조건 (없음)
-            null,  // 조건 값 (없음)
-            null,  // 그룹화 (없음)
-            null,  // 정렬 (없음)
-            null  // 정렬 방법 없음
-        )
+//            cursor = dbHelper.loadDatabase().query(
+//            "mbti_info",  // 테이블 이름
+//            arrayOf("type", "description", "path"),  // 가져올 컬럼
+//            null,  // 조건 (없음)
+//            null,  // 조건 값 (없음)
+//            null,  // 그룹화 (없음)
+//            null,  // 정렬 (없음)
+//            null  // 정렬 방법 없음
+//        )
 
             // Intent로 전달된 MBTI 결과 가져오기
-            val result = intent.getStringExtra("result") ?: return
+            val result = intent.getStringExtra("RESULT")
 
-            Toast.makeText(baseContext, result, Toast.LENGTH_LONG).show()
+            binding.description.text = result
 
             // DB에서 MBTI 정보 가져오기
 //            val mbtiInfo = dbHelper.getMBTIInfo(result)
