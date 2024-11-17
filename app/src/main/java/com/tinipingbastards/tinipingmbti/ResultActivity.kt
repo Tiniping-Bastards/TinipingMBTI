@@ -21,37 +21,17 @@ class ResultActivity : AppCompatActivity() {
             binding = ActivityResultBinding.inflate(layoutInflater)  // ViewBinding 인플레이트
             setContentView(binding.root)
 
-            dbHelper = DBHelper(this)
-
-//            cursor = dbHelper.loadDatabase().query(
-//            "mbti_info",  // 테이블 이름
-//            arrayOf("type", "description", "path"),  // 가져올 컬럼
-//            null,  // 조건 (없음)
-//            null,  // 조건 값 (없음)
-//            null,  // 그룹화 (없음)
-//            null,  // 정렬 (없음)
-//            null  // 정렬 방법 없음
-//        )
-
             // Intent로 전달된 MBTI 결과 가져오기
             val result = intent.getStringExtra("RESULT")
 
-            binding.description.text = result
+            val db = DBHelper(this).loadDatabase()
 
-            // DB에서 MBTI 정보 가져오기
-//            val mbtiInfo = dbHelper.getMBTIInfo(result)
-//
-//            val imagePath = dbHelper
+            cursor = db.rawQuery("Select * From questions", null)
 
+            cursor?.moveToFirst()
 
-            // UI에 데이터 표시
-//            if (mbtiInfo != null) {
-//                binding.mbtiInfo.text = mbtiInfo.type  // ViewBinding을 사용하여 텍스트 설정
-//                binding.description.text = mbtiInfo.description
-//                binding
-//
-//            } else {
-//                binding.mbtiInfo.text = "결과를 찾을 수 없습니다."
-//            }
+            // UI 출력
+            binding.description.text = cursor?.getString(2)
+
     }
 }
