@@ -63,17 +63,14 @@ class QuestionActivity : AppCompatActivity() {
             binding.btnAnswer1.text = cursor?.getString(2) // 옵션 1
             binding.btnAnswer2.text = cursor?.getString(3) // 옵션 2
         } else {
-            result = calculateResult()
-            val intent = Intent(this, ResultActivity::class.java)
-            intent.putExtra("RESULT", result)  // 최종 결과를 Intent로 전달
-            startActivity(intent)
+            finish()
         }
     }
 
     private fun processAnswer(selectedOption: Int) {
-        val questionType = cursor?.getString(1)  // question_type
+        val questionNumber = cursor?.position ?: return
 
-        calculateAnswerResult(questionType, selectedOption)
+        calculateAnswerResult(questionNumber + 1, selectedOption)
 
         if (cursor?.moveToNext() == true) {
             updateUI()
@@ -87,16 +84,13 @@ class QuestionActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun calculateAnswerResult(question_type: String?, selectedOption: Int) {
-        when (question_type) {
-            "E" -> if (selectedOption == 1) eCount++ else iCount++
-            "I" -> if (selectedOption == 1) iCount++ else eCount++
-            "S" -> if (selectedOption == 1) sCount++ else nCount++
-            "N" -> if (selectedOption == 1) nCount++ else sCount++
-            "T" -> if (selectedOption == 1) tCount++ else fCount++
-            "F" -> if (selectedOption == 1) fCount++ else tCount++
-            "J" -> if (selectedOption == 1) jCount++ else pCount++
-            "P" -> if (selectedOption == 1) pCount++ else jCount++
+    private fun calculateAnswerResult(questionNumber: Int, selectedOption: Int) {
+        // 각 질문에 해당하는 타입을 설정
+        when (questionNumber) {
+            in setOf(1,2,9) -> if (selectedOption == 1) eCount++ else iCount++
+            in setOf(3,4,10) -> if (selectedOption == 1) sCount++ else nCount++
+            in setOf(5,6,11) -> if (selectedOption == 1) tCount++ else fCount++
+            in setOf(7,8,12) -> if (selectedOption == 1) jCount++ else pCount++
         }
     }
 
