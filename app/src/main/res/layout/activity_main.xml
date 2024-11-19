@@ -9,33 +9,25 @@
 
     <ImageView
         android:id="@+id/background"
-        android:layout_width="match_parent"
+        android:layout_width="900dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tiniping_background" />
+        app:srcCompat="@drawable/tiniping_background2"/>
 
     <Button
         android:id="@+id/start_btn"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="120dp"
         android:text="시작하기 "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="279dp"
-        android:layout_height="261dp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64"
-        app:srcCompat="@drawable/tiniping_logo" />
+        app:layout_constraintTop_toTopOf="@+id/background"
+        app:layout_constraintVertical_bias="0.435" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

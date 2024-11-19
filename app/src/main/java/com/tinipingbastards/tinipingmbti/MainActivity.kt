@@ -1,18 +1,15 @@
 package com.tinipingbastards.tinipingmbti
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
 
-    private lateinit var mediaPlayer : MediaPlayer
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
+    private lateinit var bgmHandler: BGMHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,21 +17,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        bgmHandler = TinipingApplication.bgmHandler
+
         // 시작하기 버튼 누르면 질문 창으로 이동
         binding.startBtn.setOnClickListener{
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
 
-            mediaPlayer.stop()
+            bgmHandler.pause(R.raw.the_first_moment, 3000)
         }
 
         // 배경음악 재생
-        mediaPlayer = MediaPlayer.create(this, R.raw.the_first_moment)
-
-        mediaPlayer.isLooping = true
-        mediaPlayer.start()
-
-
-
+        bgmHandler.play(R.raw.the_first_moment, 100, 10000)
     }
 }
