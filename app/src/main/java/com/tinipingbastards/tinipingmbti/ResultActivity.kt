@@ -27,11 +27,10 @@ class ResultActivity : AppCompatActivity() {
             // Intent로 전달된 MBTI 결과 가져오기
             val result = intent.getStringExtra("RESULT")
 
-            val db = DBHelper(this).loadDatabase()
 
             cursor = dbHelper.loadDatabase().query(
                 "result",  // 테이블 이름
-                arrayOf("type","description", "path"),  // 가져올 컬럼
+                arrayOf("type","description", "path", "name"),  // 가져올 컬럼
                 "type = ?",
                 arrayOf(result),
                 null,  // 그룹화 (없음)
@@ -43,6 +42,7 @@ class ResultActivity : AppCompatActivity() {
             // UI 업데이트
             binding.mbtiInfo.text = cursor?.getString(0)  // 첫 번째 컬럼: type
             binding.description.text = cursor?.getString(1)  // 두 번째 컬럼: description
+            binding.name.text = cursor?.getString(3)
 
             // 이미지 파일명 가져오기
             val imageName = cursor?.getString(2)  // 세 번째 컬럼: path
