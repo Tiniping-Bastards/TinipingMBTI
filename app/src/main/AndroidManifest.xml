@@ -21,9 +21,11 @@
             android:exported="false" />
         <activity
             android:name=".QuestionActivity"
+            android:noHistory="true"
             android:exported="false" />
         <activity
             android:name=".IntroActivity"
+            android:noHistory="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

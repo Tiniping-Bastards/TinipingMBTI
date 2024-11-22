@@ -40,7 +40,21 @@ class IntroActivity : AppCompatActivity() {
         // 인트로 비디오 끝나면 메인화면으로 이동
         binding.videoView.setOnCompletionListener {
             val intent = Intent(this, MainActivity::class.java)
+
             startActivity(intent)
+        }
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+
+        binding.videoView.pause()
+
+        if (Build.VERSION.SDK_INT >= 34) {
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.none, R.anim.activity_intro_end)
+        } else {
+            overridePendingTransition(R.anim.none, R.anim.activity_intro_end)
         }
     }
 }
