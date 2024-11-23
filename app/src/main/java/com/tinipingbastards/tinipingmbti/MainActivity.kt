@@ -17,17 +17,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        bgmHandler = TinipingApplication.bgmHandler
+        // 시그니처 사운드 재생
+        TinipingApplication.sfxHandler.playSFX(R.raw.tiniping_signature)
 
-        // 시작하기 버튼 누르면 질문 창으로 이동
+        // 시작하기 버튼 누르면 효과음 + 질문 창으로 이동
         binding.startBtn.setOnClickListener{
+            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+
             val intent = Intent(this, QuestionActivity::class.java)
             startActivity(intent)
-
-            bgmHandler.pause(R.raw.the_first_moment, 3000)
         }
 
-        // 배경음악 재생
-        bgmHandler.play(R.raw.the_first_moment, 100, 10000)
+        // 로고 연타하면 크레딧 화면으로 넘어가게 하기
+
+
+
+
+//        // 배경음악 재생
+//         bgmHandler = TinipingApplication.bgmHandler
+//        bgmHandler.play(R.raw.the_first_moment, 100, 10000)
     }
 }
