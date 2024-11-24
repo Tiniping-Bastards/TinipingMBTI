@@ -35,8 +35,8 @@ class QuestionActivity : AppCompatActivity() {
 
         // DB에서 질문 데이터를 가져옵니다.
         cursor = dbHelper.loadDatabase().query(
-            "questions",  // 테이블 이름
-            arrayOf("question_text","question_type", "option_1", "option_2"),  // 가져올 컬럼
+            "mbti_questions",  // 테이블 이름
+            arrayOf("question_text","question_type", "option1", "option2"),  // 가져올 컬럼
             null,  // 조건 (없음)
             null,  // 조건 값 (없음)
             null,  // 그룹화 (없음)
