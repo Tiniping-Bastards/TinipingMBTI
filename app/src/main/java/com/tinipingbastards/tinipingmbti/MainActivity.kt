@@ -2,6 +2,8 @@ package com.tinipingbastards.tinipingmbti
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 
@@ -29,9 +31,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 로고 연타하면 크레딧 화면으로 넘어가게 하기
+        binding.logo.setOnClickListener(object : MultipleClickListener() {
+            override fun onClick(v: View?) {
+                super.onClick(v)
 
+                Log.d("asdf", "Click")
 
+                TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+            }
 
+            override fun onMultipleClick(v: View?, count: Int) {
+                if (count == 5)
+                {
+                    val intent = Intent(baseContext, CreditActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        })
 
 //        // 배경음악 재생
 //         bgmHandler = TinipingApplication.bgmHandler
