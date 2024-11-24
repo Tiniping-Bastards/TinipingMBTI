@@ -16,6 +16,7 @@ class QuestionActivity : AppCompatActivity() {
     private lateinit var dbHelper: DBHelper
     private var cursor: Cursor? = null  // Cursor 객체를 클래스 레벨에서 선언
     private var result: String = ""     // 최종 MBTI 결과를 저장할 변수
+    private var currentQuestionIndex: Int = 0
     private var eCount: Int = 0         // "E" 선택 횟수
     private var iCount: Int = 0         // "I" 선택 횟수
     private var sCount: Int = 0         // "S" 선택 횟수
@@ -35,8 +36,8 @@ class QuestionActivity : AppCompatActivity() {
 
         // DB에서 질문 데이터를 가져옵니다.
         cursor = dbHelper.loadDatabase().query(
-            "mbti_questions",  // 테이블 이름
-            arrayOf("question_text","question_type", "option1", "option2"),  // 가져올 컬럼
+            "questions",  // 테이블 이름
+            arrayOf("question_text","question_type", "option_1", "option_2"),  // 가져올 컬럼
             null,  // 조건 (없음)
             null,  // 조건 값 (없음)
             null,  // 그룹화 (없음)
@@ -62,6 +63,7 @@ class QuestionActivity : AppCompatActivity() {
             binding.tvQuestion.text = cursor?.getString(0)  // 질문 텍스트
             binding.btnAnswer1.text = cursor?.getString(2) // 옵션 1
             binding.btnAnswer2.text = cursor?.getString(3) // 옵션 2
+
         } else {
             finish()
         }
