@@ -13,7 +13,7 @@ import java.io.OutputStream
 class DBHelper(context: Context) {
     private val context = context
 
-    private val DATABASE_NAME = "mbti_test.db"  // 데이터베이스 파일 이름
+    private val DATABASE_NAME = "mbti_test_2.db"  // 데이터베이스 파일 이름
     private val DATABASE_PATH = "/data/data/com.tinipingbastards.tinipingmbti/databases/"  // 내부 저장소 경로
 
     // 데이터베이스 복사 작업
