@@ -1,8 +1,10 @@
 package com.tinipingbastards.tinipingmbti
 
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,55 +16,67 @@ import com.tinipingbastards.tinipingmbti.databinding.ActivityResultBinding
 
 class ResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultBinding
-    private var cursor: Cursor? = null  // Cursor 객체를 클래스 레벨에서 선언
+    private var cursor: Cursor? = null
     private lateinit var dbHelper: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            binding = ActivityResultBinding.inflate(layoutInflater)  // ViewBinding 인플레이트
+            binding = ActivityResultBinding.inflate(layoutInflater)
             setContentView(binding.root)
 
             dbHelper = DBHelper(this)
 
-            // Intent로 전달된 MBTI 결과 가져오기
             val result = intent.getStringExtra("RESULT")
 
 
             cursor = dbHelper.loadDatabase().query(
-                "result",  // 테이블 이름
-                arrayOf("type","description", "path", "name"),  // 가져올 컬럼
+                "result",
+                arrayOf("type","description", "path", "name", "fits", "unfits", "fitsname", "unfitsname"),  // 가져올 컬럼
                 "type = ?",
                 arrayOf(result),
-                null,  // 그룹화 (없음)
-                null,  // 정렬 (없음)
-                null  // 정렬 방법 없음
+                null,
+                null,
+                null
         )
 
         if (cursor != null && cursor?.moveToFirst() == true) {
-            // UI 업데이트
-            binding.mbtiInfo.text = cursor?.getString(0)  // 첫 번째 컬럼: type
-            binding.description.text = cursor?.getString(1)  // 두 번째 컬럼: description
+
+            binding.description.text = cursor?.getString(1)
             binding.name.text = cursor?.getString(3)
+            binding.fitsName.text = cursor?.getString(6)
+            binding.unFitsName.text = cursor?.getString(7)
 
-            // 이미지 파일명 가져오기
-            val imageName = cursor?.getString(2)  // 세 번째 컬럼: path
+            val imageName = cursor?.getString(2)
+            val imageFits = cursor?.getString(4)
+            val imageUnFits = cursor?.getString(5)
 
-            // 이미지 파일명에 해당하는 리소스를 drawable에서 가져오기
             val imageResourceId = resources.getIdentifier(imageName, "drawable", packageName)
-            if (imageResourceId != 0) {
-                // 이미지 리소스를 ImageView에 설정
+            val imageResourceId2 = resources.getIdentifier(imageFits, "drawable", packageName)
+            val imageResourceId3 = resources.getIdentifier(imageUnFits, "drawable", packageName)
+
+            if (imageResourceId != 0 && imageResourceId2 != 0 && imageResourceId3 != 0) {
                 binding.mbtiImage.setImageResource(imageResourceId)
+                binding.fair.setImageResource(imageResourceId2)
+                binding.unfair.setImageResource(imageResourceId3)
             } else {
-                // 이미지가 없는 경우 대체 이미지 설정
                 binding.mbtiImage.setImageResource(R.drawable.enfp)
+                binding.fair.setImageResource(R.drawable.enfp)
+                binding.unfair.setImageResource(R.drawable.enfp)
             }
         } else {
-            // 데이터가 없을 경우 처리
             Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        // 커서 닫기
         cursor?.close()
+
+        val retryButton = findViewById<Button>(R.id.returnButton)
+        retryButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+
+            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+        }
 
     }
 }
