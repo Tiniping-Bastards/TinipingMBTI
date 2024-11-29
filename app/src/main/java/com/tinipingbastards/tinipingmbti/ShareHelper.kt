@@ -5,17 +5,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ScrollView
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
 
 class ShareHelper(
     private val context: Context,
-    private val scrollView: View,
+    private val scrollView: ScrollView,
     private val authority: String
 ){
     fun captureScrollView(): Bitmap {
-        val bitmap = Bitmap.createBitmap(scrollView.width, scrollView.height, Bitmap.Config.ARGB_8888)
+        val scrollviewHeight = scrollView.getChildAt(0).height
+        val bitmap = Bitmap.createBitmap(scrollView.width, scrollviewHeight, Bitmap.Config.ARGB_8888)
         val canvas = android.graphics.Canvas(bitmap)
         scrollView.draw(canvas)
         return bitmap

@@ -30,7 +30,8 @@ class ResultActivity : AppCompatActivity() {
 
             cursor = dbHelper.loadDatabase().query(
                 "result",
-                arrayOf("type","description", "path", "name", "fits", "unfits", "fitsname", "unfitsname"),  // 가져올 컬럼
+                arrayOf("type","description", "path", "name", "fits",
+                    "unfits", "fitsname", "unfitsname","oneline"),  // 가져올 컬럼
                 "type = ?",
                 arrayOf(result),
                 null,
@@ -51,6 +52,7 @@ class ResultActivity : AppCompatActivity() {
             binding.name.text = cursor?.getString(3)
             binding.fitsName.text = cursor?.getString(6)
             binding.unFitsName.text = cursor?.getString(7)
+            binding.oneLine.text = cursor?.getString(8)
 
             val imageName = cursor?.getString(2)
             val imageFits = cursor?.getString(4)
