@@ -2,14 +2,11 @@ package com.tinipingbastards.tinipingmbti
 
 import android.content.Intent
 import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ScrollView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.tinipingbastards.tinipingmbti.databinding.ActivityResultBinding
 
 
@@ -27,6 +24,8 @@ class ResultActivity : AppCompatActivity() {
             dbHelper = DBHelper(this)
 
             val result = intent.getStringExtra("RESULT")
+            val scrollView = findViewById<ScrollView>(R.id.scrollView)
+            val shareButton = findViewById<Button>(R.id.shareButton)
 
 
             cursor = dbHelper.loadDatabase().query(
@@ -37,8 +36,15 @@ class ResultActivity : AppCompatActivity() {
                 null,
                 null,
                 null
-        )
+            )
 
+            val shareHelper = ShareHelper(
+                context = this,
+                scrollView = scrollView,
+                authority = "${packageName}.fileprovider"
+            )
+
+        // DB에서 결과값 가져오고 보여주기
         if (cursor != null && cursor?.moveToFirst() == true) {
 
             binding.description.text = cursor?.getString(1)
@@ -69,6 +75,7 @@ class ResultActivity : AppCompatActivity() {
 
         cursor?.close()
 
+        // 다시하기
         val retryButton = findViewById<Button>(R.id.returnButton)
         retryButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -78,5 +85,11 @@ class ResultActivity : AppCompatActivity() {
             TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
         }
 
+        // 공유하기
+        shareButton.setOnClickListener {
+            shareHelper.captureAndShare()
+
+            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+        }
     }
 }
