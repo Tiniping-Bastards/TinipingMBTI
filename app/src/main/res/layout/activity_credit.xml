@@ -18,6 +18,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.095" />
 
+    <LinearLayout
+        android:layout_width="356dp"
+        android:layout_height="504dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.228">
+
+        <include
+            android:id="@+id/phs"
+            layout="@layout/layout_developer" />
+
+        <include
+            android:id="@+id/sjh"
+            layout="@layout/layout_developer" />
+
+        <include
+            android:id="@+id/mjw"
+            layout="@layout/layout_developer" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
