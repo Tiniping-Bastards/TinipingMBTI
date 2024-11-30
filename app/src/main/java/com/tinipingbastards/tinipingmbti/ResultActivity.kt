@@ -31,7 +31,7 @@ class ResultActivity : AppCompatActivity() {
             cursor = dbHelper.loadDatabase().query(
                 "result",
                 arrayOf("type","description", "path", "name", "fits",
-                    "unfits", "fitsname", "unfitsname","oneline"),  // 가져올 컬럼
+                    "unfits", "fitsname", "unfitsname","oneline", "desc", "sound"),  // 가져올 컬럼
                 "type = ?",
                 arrayOf(result),
                 null,
@@ -53,14 +53,24 @@ class ResultActivity : AppCompatActivity() {
             binding.fitsName.text = cursor?.getString(6)
             binding.unFitsName.text = cursor?.getString(7)
             binding.oneLine.text = cursor?.getString(8)
+            binding.desc.text = cursor?.getString(9)
 
             val imageName = cursor?.getString(2)
             val imageFits = cursor?.getString(4)
             val imageUnFits = cursor?.getString(5)
+            val tinipingSound = cursor?.getString(10)
 
             val imageResourceId = resources.getIdentifier(imageName, "drawable", packageName)
             val imageResourceId2 = resources.getIdentifier(imageFits, "drawable", packageName)
             val imageResourceId3 = resources.getIdentifier(imageUnFits, "drawable", packageName)
+            val tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
+
+//            if (tinipingSoundId != 0) {
+//                TinipingApplication.sfxHandler.playSFX(tinipingSoundId)
+//            } else {
+//                Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+//            }
+
 
             if (imageResourceId != 0 && imageResourceId2 != 0 && imageResourceId3 != 0) {
                 binding.mbtiImage.setImageResource(imageResourceId)
