@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -14,30 +15,53 @@
         android:orientation="vertical"
         android:padding="16dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        android:background="@drawable/b1">
 
+        <TextView
+            android:id="@+id/tvQuestionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:text="1/12"
+            android:textSize="26sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="189dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="0dp"
+            android:max="100"
+            android:progress="0" />
 
         <TextView
             android:id="@+id/tvQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="225dp"
+            android:layout_marginBottom="250dp"
             android:gravity="center"
             android:text="질문 1"
-            android:textSize="18sp" />
+            android:textColor="@color/white"
+            android:textSize="28sp" />
 
         <Button
             android:id="@+id/btnAnswer1"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:textSize="21sp"
             android:text="답변 1" />
 
         <Button
             android:id="@+id/btnAnswer2"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
+            android:textSize="21sp"
             android:text="답변 2" />
 
     </LinearLayout>

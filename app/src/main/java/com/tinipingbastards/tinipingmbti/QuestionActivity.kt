@@ -2,11 +2,14 @@ package com.tinipingbastards.tinipingmbti
 
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.tinipingbastards.tinipingmbti.DBHelper  // DBHelper 클래스 경로
 import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 import com.tinipingbastards.tinipingmbti.databinding.ActivityQuestionBinding
@@ -26,6 +29,10 @@ class QuestionActivity : AppCompatActivity() {
     private var jCount: Int = 0         // "J" 선택 횟수
     private var pCount: Int = 0         // "P" 선택 횟수
 
+    private lateinit var progressBar: ProgressBar
+
+    private lateinit var questionNumberTextView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,7 +41,19 @@ class QuestionActivity : AppCompatActivity() {
 
         dbHelper = DBHelper(this)
 
-        // DB에서 질문 데이터를 가져옵니다.
+        progressBar = binding.progressBar
+
+        questionNumberTextView = binding.tvQuestionNumber
+
+        //val progressColor = resources.getColor(R.color.green, null)
+        //binding.progressBar.indeterminateDrawable.setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN)
+
+        val customFont: Typeface? = ResourcesCompat.getFont(this, R.font.navi)
+        binding.tvQuestion.typeface = customFont
+        binding.tvQuestionNumber.typeface = customFont
+        binding.btnAnswer1.typeface = customFont
+        binding.btnAnswer2.typeface = customFont
+
         cursor = dbHelper.loadDatabase().query(
             "questions",  // 테이블 이름
             arrayOf("question_text","question_type", "option_1", "option_2"),  // 가져올 컬럼
@@ -50,13 +69,16 @@ class QuestionActivity : AppCompatActivity() {
         updateUI()
 
         binding.btnAnswer1.setOnClickListener {
+            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
             processAnswer(1)
         }
 
         binding.btnAnswer2.setOnClickListener {
+            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
             processAnswer(2)
         }
     }
+
 
     private fun updateUI() {
         if (cursor != null && !cursor!!.isAfterLast) {
@@ -64,9 +86,23 @@ class QuestionActivity : AppCompatActivity() {
             binding.btnAnswer1.text = cursor?.getString(2) // 옵션 1
             binding.btnAnswer2.text = cursor?.getString(3) // 옵션 2
 
+            updateProgressBar()
+            updateQuestionNumberText()
         } else {
             finish()
         }
+    }
+
+    private fun updateProgressBar() {
+        val totalQuestions = 12
+        val progress = ((currentQuestionIndex + 1) * 100) / totalQuestions
+        progressBar.progress = progress
+    }
+
+    private fun updateQuestionNumberText() {
+        val totalQuestions = 12
+        val questionText = "${currentQuestionIndex + 1}/$totalQuestions"
+        questionNumberTextView.text = questionText
     }
 
     private fun processAnswer(selectedOption: Int) {
@@ -74,16 +110,21 @@ class QuestionActivity : AppCompatActivity() {
 
         calculateAnswerResult(questionNumber + 1, selectedOption)
 
+        currentQuestionIndex++
+
         if (cursor?.moveToNext() == true) {
             updateUI()
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         } else {
             result = calculateResult()  // 결과를 계산하여 result에 저장
 
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, result, Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("RESULT", result)
             startActivity(intent)
+
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         }
     }
     private fun calculateAnswerResult(questionNumber: Int, selectedOption: Int) {
