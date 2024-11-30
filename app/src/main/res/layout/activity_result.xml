@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:padding="8dp"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@drawable/enfj" />
 
             <TextView
                 android:id="@+id/name"

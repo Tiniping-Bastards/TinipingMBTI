@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.core.content.FileProvider
 import java.io.File
