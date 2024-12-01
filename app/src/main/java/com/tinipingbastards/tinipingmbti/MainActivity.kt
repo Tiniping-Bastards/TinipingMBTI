@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 
@@ -19,11 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        TinipingApplication.mediaPlayer.setVolume(1f, 1f)
-
-        // 시그니처 사운드 재생
-        TinipingApplication.sfxHandler.playSFX(R.raw.tiniping_signature)
 
         // 시작하기 버튼 누르면 효과음 + 질문 창으로 이동
         binding.startBtn.setOnClickListener{
@@ -39,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                 super.onClick(v)
 
                 TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+
+                binding.logo.startAnimation(AnimationUtils.loadAnimation(baseContext, R.anim.main_logo_click))
             }
 
             override fun onMultipleClick(v: View?, count: Int) {
@@ -49,6 +47,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
+        // 배경음악 재생
+        TinipingApplication.mediaPlayer.setVolume(1f, 1f)
+
+        // 시그니처 사운드 재생
+        TinipingApplication.sfxHandler.playSFX(R.raw.tiniping_signature)
+
+        // UI애니메이션 적용
+        binding.logo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_logo_show))
+        binding.startBtn.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_start_show))
 
 //        // 배경음악 재생
 //         bgmHandler = TinipingApplication.bgmHandler

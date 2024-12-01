@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.tinipingbastards.tinipingmbti.databinding.ActivityIntroBinding
@@ -28,7 +29,8 @@ class IntroActivity : AppCompatActivity() {
         binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.intro_video))
         binding.videoView.start()
 
-        // Skip 텍스트 5초 뒤에 활성화
+        // Skip 텍스트 3초 뒤에 활성화
+        binding.skipText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.intro_skip_show))
 
         // 인트로 비디오 누르면 메인화면으로 이동
         binding.videoView.setOnClickListener {
