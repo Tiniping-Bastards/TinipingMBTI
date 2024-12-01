@@ -20,16 +20,18 @@ class IntroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // BGM 재생 시작
-        TinipingApplication.bgmHandler.play(R.raw.tiniping_100, 0, 0)
+        //TinipingApplication.bgmHandler.play(R.raw.tiniping_100, 0, 0)
+        TinipingApplication.mediaPlayer.start()
+        TinipingApplication.mediaPlayer.setVolume(0.5f, 0.5f)
 
         // 인트로 비디오 재생
         binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.intro_video))
         binding.videoView.start()
 
+        // Skip 텍스트 5초 뒤에 활성화
+
         // 인트로 비디오 누르면 메인화면으로 이동
         binding.videoView.setOnClickListener {
-            // 하얘졌다가 투명도 낮추면서 전환하기
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -37,11 +39,9 @@ class IntroActivity : AppCompatActivity() {
         // 인트로 비디오 끝나면 메인화면으로 이동
         binding.videoView.setOnCompletionListener {
             val intent = Intent(this, MainActivity::class.java)
-
             startActivity(intent)
         }
     }
-
 
     override fun onPause() {
         super.onPause()

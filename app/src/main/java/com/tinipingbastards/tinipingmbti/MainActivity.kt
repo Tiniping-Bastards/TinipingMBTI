@@ -1,12 +1,13 @@
 package com.tinipingbastards.tinipingmbti
 
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        TinipingApplication.mediaPlayer.setVolume(1f, 1f)
 
         // 시그니처 사운드 재생
         TinipingApplication.sfxHandler.playSFX(R.raw.tiniping_signature)
@@ -35,8 +38,6 @@ class MainActivity : AppCompatActivity() {
             override fun onClick(v: View?) {
                 super.onClick(v)
 
-                Log.d("asdf", "Click")
-
                 TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
             }
 
@@ -52,5 +53,15 @@ class MainActivity : AppCompatActivity() {
 //        // 배경음악 재생
 //         bgmHandler = TinipingApplication.bgmHandler
 //        bgmHandler.play(R.raw.the_first_moment, 100, 10000)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (Build.VERSION.SDK_INT >= 34) {
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_OPEN, R.anim.slide_in_right, R.anim.slide_out_left)
+        } else {
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 }
