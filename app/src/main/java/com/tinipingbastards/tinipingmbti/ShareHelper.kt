@@ -18,7 +18,13 @@ class ShareHelper(
         val scrollviewHeight = scrollView.getChildAt(0).height
         val bitmap = Bitmap.createBitmap(scrollView.width, scrollviewHeight, Bitmap.Config.ARGB_8888)
         val canvas = android.graphics.Canvas(bitmap)
-        scrollView.draw(canvas)
+
+        scrollView.background?.let { background ->
+            background.setBounds(0, 0, scrollView.width, scrollviewHeight)
+            background.draw(canvas)
+        }
+
+        scrollView.getChildAt(0).draw(canvas)
         return bitmap
     }
 
