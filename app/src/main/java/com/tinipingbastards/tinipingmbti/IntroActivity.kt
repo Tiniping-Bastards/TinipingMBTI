@@ -22,12 +22,6 @@ class IntroActivity : AppCompatActivity() {
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // BGM 재생 시작
-        //TinipingApplication.bgmHandler.play(R.raw.tiniping_100, 0, 0)
-//        TinipingApplication.mediaPlayer = MediaPlayer.create(baseContext, R.raw.tiniping_100)
-//        TinipingApplication.mediaPlayer.start()
-//        TinipingApplication.mediaPlayer.setVolume(1f, 1f)
-
         // 인트로 비디오 재생
         binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.intro_video))
         binding.videoView.start()
@@ -56,6 +50,7 @@ class IntroActivity : AppCompatActivity() {
         super.onPause()
 
         binding.videoView.pause()
+        bgmManager.pause(R.raw.intro_bgm)
 
         if (Build.VERSION.SDK_INT >= 34) {
             overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.none, R.anim.activity_intro_end)

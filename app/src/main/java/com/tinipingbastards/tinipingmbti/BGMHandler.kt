@@ -36,7 +36,7 @@ class BGMHandler(context: Context, uri: Uri) : MediaPlayer.OnPreparedListener{
         mediaPlayer.pause()
     }
 
-    fun setVolume(mediaPlayer : MediaPlayer, volume: Float) {
+    fun setVolume(volume: Float) {
         mediaPlayer.setVolume(volume, volume)
     }
 }

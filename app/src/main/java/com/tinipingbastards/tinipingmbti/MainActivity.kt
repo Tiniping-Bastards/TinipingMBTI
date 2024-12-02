@@ -14,8 +14,6 @@ import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var bgmHandler: BGMHandler
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,9 +54,6 @@ class MainActivity : AppCompatActivity() {
         binding.logo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_logo_show))
         binding.startBtn.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_start_show))
 
-//        // 배경음악 재생
-//         bgmHandler = TinipingApplication.bgmHandler
-//        bgmHandler.play(R.raw.the_first_moment, 100, 10000)
     }
 
     override fun onPause() {

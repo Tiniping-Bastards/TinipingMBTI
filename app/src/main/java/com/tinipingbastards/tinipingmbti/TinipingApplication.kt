@@ -1,6 +1,9 @@
 package com.tinipingbastards.tinipingmbti
 
+import android.app.Activity
 import android.app.Application
+import org.checkerframework.checker.units.qual.h
+
 
 class TinipingApplication : Application() {
     companion object {
@@ -18,4 +21,5 @@ class TinipingApplication : Application() {
         sfxHandler.loadSFX(R.raw.button_click)
         sfxHandler.loadSFX(R.raw.tiniping_signature)
     }
+
 }

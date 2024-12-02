@@ -1,6 +1,7 @@
 package com.tinipingbastards.tinipingmbti
 
 import android.content.Context
+import android.health.connect.datatypes.units.Volume
 import android.media.MediaPlayer
 import android.net.Uri
 
@@ -21,10 +22,15 @@ class BGMManager(val context: Context, val packageName: String) {
         bgmHandlers[address]?.pause()
     }
 
-    fun isLoaded (address: Int) : Int {
+    fun isLoaded(address: Int) : Int {
         if (bgmHandlers[address]!!.isLoaded)
             return 1
         else
             return 0
+    }
+
+    fun setVolume(address: Int, volume: Float)
+    {
+        bgmHandlers[address]?.setVolume(volume)
     }
 }
