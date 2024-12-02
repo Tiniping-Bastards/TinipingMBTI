@@ -67,7 +67,6 @@ class ResultActivity : AppCompatActivity() {
             val tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
 
             if (tinipingSoundId != 0) {
-                TinipingApplication.bgmManager.load(tinipingSoundId)
                 TinipingApplication.bgmManager.play(tinipingSoundId)
             } else {
                 Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -88,6 +87,8 @@ class ResultActivity : AppCompatActivity() {
         }
 
         cursor?.close()
+
+
 
         // 다시하기
         val retryButton = findViewById<Button>(R.id.returnButton)

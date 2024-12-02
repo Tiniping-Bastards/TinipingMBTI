@@ -38,6 +38,9 @@
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
+            android:name=".SplashResultActivity"
+            android:exported="true" />
+        <activity
             android:name=".QuestionActivity"
             android:exported="false"
             android:noHistory="true" />
