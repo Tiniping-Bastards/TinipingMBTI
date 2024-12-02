@@ -49,9 +49,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // 배경음악 재생
-        bgmManager.play(R.raw.tiniping_100)
-
         // 시그니처 사운드 재생
         sfxHandler.playSFX(R.raw.tiniping_signature)
 

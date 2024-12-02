@@ -9,12 +9,11 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.tinipingbastards.tinipingmbti.TinipingApplication.Companion.bgmManager
 import com.tinipingbastards.tinipingmbti.databinding.ActivityIntroBinding
 
 class IntroActivity : AppCompatActivity() {
     private lateinit var binding : ActivityIntroBinding
-
-    private lateinit var bgmPlayer : MediaPlayer
 
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +33,8 @@ class IntroActivity : AppCompatActivity() {
         binding.videoView.start()
 
         // 인트로 브금 재생
-        bgmPlayer = MediaPlayer.create(baseContext, R.raw.intro_bgm)
-        bgmPlayer.start()
+        bgmManager.play(R.raw.intro_bgm)
+        bgmManager.play(R.raw.tiniping_100)
 
         // Skip 텍스트 3초 뒤에 활성화
         binding.skipText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.intro_skip_show))
@@ -57,8 +56,6 @@ class IntroActivity : AppCompatActivity() {
         super.onPause()
 
         binding.videoView.pause()
-
-        bgmPlayer.release()
 
         if (Build.VERSION.SDK_INT >= 34) {
             overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.none, R.anim.activity_intro_end)
