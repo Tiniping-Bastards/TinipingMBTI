@@ -23,12 +23,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/result_font01"
+                android:fontFamily="@font/navi"
                 android:layout_marginTop="48dp"
-                android:layout_marginBottom="8dp"
                 android:text="당신의 티니핑은?"
                 android:textColor="#ffffff"
-                android:textSize="28sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,11 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/result_font01"
+                android:fontFamily="@font/navi"
                 android:layout_marginBottom="8dp"
                 android:text="MBTI"
                 android:textColor="#ffffff"
-                android:textSize="40sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -58,11 +57,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/result_font01"
-                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/navi"
                 android:text="티니핑"
                 android:textColor="#000000"
-                android:textSize="32sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -70,24 +68,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/navi"
                 android:gravity="center"
-                android:layout_marginBottom="32dp"
-                android:fontFamily="@font/result_font01"
                 android:text="말풍선"
                 android:textColor="#D35D83"
-                android:textSize="24sp"
-                android:textStyle="bold"  />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/desc"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="40dp"
-                android:fontFamily="@font/result_font01"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/navi"
                 android:text="모든 것을 귀찮아하는 찮아핑\n 맛있는 것을 먹으려다가도 귀찮아서 포기할까 하는 티니핑"
                 android:textColor="#555555"
-                android:textSize="20sp"
+                android:textSize="28sp"
+                android:textStyle="bold"
                 android:lineSpacingExtra="4dp"
                 android:gravity="center"/>
 
@@ -96,12 +95,13 @@
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="64dp"
-                android:fontFamily="@font/result_font01"
+                android:layout_marginBottom="56dp"
+                android:fontFamily="@font/navi"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,"
                 android:textColor="#444444"
+                android:textStyle="bold"
                 android:lineSpacingExtra="8dp"
-                android:textSize="20sp" />
+                android:textSize="28sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,11 +119,11 @@
                         android:id="@+id/fairTiniping"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/result_font01"
+                        android:fontFamily="@font/navi"
                         android:gravity="center"
                         android:text="나와 잘 맞는 티니핑"
                         android:textColor="#1BC4EB"
-                        android:textSize="16sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
 
@@ -137,10 +137,11 @@
                         android:id="@+id/fitsName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/result_font01"
+                        android:fontFamily="@font/navi"
                         android:gravity="center"
                         android:text="티니핑"
-                        android:textSize="20dp"/>
+                        android:textStyle="bold"
+                        android:textSize="28dp"/>
 
                 </LinearLayout>
 
@@ -155,11 +156,11 @@
                         android:id="@+id/unfairTiniping"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/result_font01"
+                        android:fontFamily="@font/navi"
                         android:gravity="center"
                         android:text="나와 안 맞는 티니핑"
                         android:textColor="#D35D83"
-                        android:textSize="16sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -172,10 +173,11 @@
                         android:id="@+id/unFitsName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/result_font01"
+                        android:fontFamily="@font/navi"
                         android:gravity="center"
                         android:text="티니핑"
-                        android:textSize="20dp" />
+                        android:textStyle="bold"
+                        android:textSize="28dp" />
 
                 </LinearLayout>
 
@@ -193,7 +195,8 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/result_font01"
+                    android:fontFamily="@font/navi"
+                    android:textSize="20sp"
                     android:text="다시하기" />
 
                 <Button
@@ -202,7 +205,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/result_font01"
+                    android:fontFamily="@font/navi"
+                    android:textSize="20sp"
                     android:text="공유하기" />
             </LinearLayout>
         </LinearLayout>
