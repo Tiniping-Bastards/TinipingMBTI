@@ -66,11 +66,11 @@ class ResultActivity : AppCompatActivity() {
             val imageResourceId3 = resources.getIdentifier(imageUnFits, "drawable", packageName)
             val tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
 
-//            if (tinipingSoundId != 0) {
-//                TinipingApplication.sfxHandler.playSFX(tinipingSoundId)
-//            } else {
-//                Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
-//            }
+            if (tinipingSoundId != 0) {
+                TinipingApplication.bgmManager.load(tinipingSoundId)
+            } else {
+                Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
 
 
             if (imageResourceId != 0 && imageResourceId2 != 0 && imageResourceId3 != 0) {
