@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.tinipingbastards.tinipingmbti.databinding.ActivityResultBinding
 
 
@@ -31,8 +30,8 @@ class ResultActivity : AppCompatActivity() {
 
             cursor = dbHelper.loadDatabase().query(
                 "result",
-                arrayOf("type","description", "path", "name", "fits",
-                    "unfits", "fitsname", "unfitsname","oneline", "desc", "sound"),  // 가져올 컬럼
+                arrayOf("type","description", "path", "name", "fits", "unfits",
+                        "fitsname", "unfitsname","oneline", "desc", "sound"),  // 가져올 컬럼
                 "type = ?",
                 arrayOf(result),
                 null,
@@ -49,6 +48,7 @@ class ResultActivity : AppCompatActivity() {
         // DB에서 결과값 가져오고 보여주기
         if (cursor != null && cursor?.moveToFirst() == true) {
 
+            binding.mbti.text = cursor?.getString(0)
             binding.description.text = cursor?.getString(1)
             binding.name.text = cursor?.getString(3)
             binding.fitsName.text = cursor?.getString(6)
