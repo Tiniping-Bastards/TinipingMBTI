@@ -16,6 +16,7 @@ class SplashResultActivity : AppCompatActivity() {
     private lateinit var binding : ActivityResultSplashBinding
     private var cursor: Cursor? = null
     private lateinit var dbHelper: DBHelper
+    private lateinit var imageHandler: ImageHandler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,15 @@ class SplashResultActivity : AppCompatActivity() {
 
         binding = ActivityResultSplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val imageList = listOf(
+            R.drawable.enfj, R.drawable.enfp, R.drawable.entj, R.drawable.enfp, R.drawable.estj,
+            R.drawable.entp, R.drawable.esfj, R.drawable.esfp, R.drawable.infj, R.drawable.infp,
+            R.drawable.intj, R.drawable.intp, R.drawable.isfj, R.drawable.isfp, R.drawable.istj, R.drawable.istp
+        )
+
+        imageHandler = ImageHandler(binding.changImage, imageList, 60L)
+        imageHandler.start()
 
         cursor = dbHelper.loadDatabase().query(
             "result",
@@ -78,17 +88,10 @@ class SplashResultActivity : AppCompatActivity() {
             }
             timer.schedule(timerTask, 0, 50)
         }
-    }
 
-//    override fun onPause() {
-//        super.onPause()
-//
-//        // 화면전환 애니메이션 삭제
-//        if (Build.VERSION.SDK_INT >= 34) {
-//            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.none, R.anim.activity_intro_end)
-//        } else {
-//            overridePendingTransition(R.anim.none, R.anim.activity_intro_end)
-//        }
-//
-//    }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        imageHandler.stop()
+    }
 }
