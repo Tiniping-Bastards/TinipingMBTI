@@ -35,7 +35,7 @@ class SplashResultActivity : AppCompatActivity() {
             R.drawable.intj, R.drawable.intp, R.drawable.isfj, R.drawable.isfp, R.drawable.istj, R.drawable.istp
         )
 
-        imageHandler = ImageHandler(binding.changImage, imageList, 60L)
+        imageHandler = ImageHandler(binding.changImage, imageList, 100L)
         imageHandler.start()
 
         cursor = dbHelper.loadDatabase().query(
@@ -47,7 +47,6 @@ class SplashResultActivity : AppCompatActivity() {
             null,
             null
         )
-
 
         if (cursor != null && cursor?.moveToFirst() == true) {
             val tinipingSound = cursor?.getString(1)
@@ -94,10 +93,11 @@ class SplashResultActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
+        // 화면전환 엑티비티
         if (Build.VERSION.SDK_INT >= 34) {
-            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, 0, 0)
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.slide_in_right, R.anim.none)
         } else {
-            overridePendingTransition(0, 0)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.none)
         }
     }
 
