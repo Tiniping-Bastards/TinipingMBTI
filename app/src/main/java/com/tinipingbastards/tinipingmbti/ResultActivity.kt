@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ScrollView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.tinipingbastards.tinipingmbti.TinipingApplication.Companion.bgmManager
+import com.tinipingbastards.tinipingmbti.TinipingApplication.Companion.sfxHandler
 import com.tinipingbastards.tinipingmbti.databinding.ActivityResultBinding
 
 
@@ -29,6 +31,8 @@ class ResultActivity : AppCompatActivity() {
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val shareButton = findViewById<Button>(R.id.shareButton)
 
+
+        sfxHandler.playSFX(R.raw.activity_changed)
 
         cursor = dbHelper.loadDatabase().query(
             "result",
@@ -70,7 +74,10 @@ class ResultActivity : AppCompatActivity() {
             tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
 
             if (tinipingSoundId != 0) {
-                TinipingApplication.bgmManager.play(tinipingSoundId)
+                bgmManager.setVolume(R.raw.tiniping_100, 0.2f)
+
+                bgmManager.seekTo(tinipingSoundId, 0)
+                bgmManager.play(tinipingSoundId)
             } else {
                 Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -110,6 +117,6 @@ class ResultActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        TinipingApplication.bgmManager.pause(tinipingSoundId)
+        bgmManager.pause(tinipingSoundId)
     }
 }

@@ -46,11 +46,11 @@ class IntroActivity : AppCompatActivity() {
 
         // 브금재생
         bgmManager.seekTo(R.raw.intro_bgm,0)
-        bgmManager.setVolume(R.raw.intro_bgm, 1.0f)
+        bgmManager.setVolume(R.raw.intro_bgm, 0.8f)
         bgmManager.play(R.raw.intro_bgm)
 
         bgmManager.seekTo(R.raw.tiniping_100, 0)
-        bgmManager.setVolume(R.raw.tiniping_100, 0.4f)
+        bgmManager.setVolume(R.raw.tiniping_100, 0.2f)
         bgmManager.play(R.raw.tiniping_100)
 
         // Skip 텍스트 3초 뒤에 활성화

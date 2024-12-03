@@ -89,8 +89,18 @@ class SplashResultActivity : AppCompatActivity() {
             timer.schedule(timerTask, 0, 50)
         }
 
-        bgmManager.setVolume(R.raw.tiniping_100, 0.2f)
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (Build.VERSION.SDK_INT >= 34) {
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, 0, 0)
+        } else {
+            overridePendingTransition(0, 0)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         imageHandler.stop()
