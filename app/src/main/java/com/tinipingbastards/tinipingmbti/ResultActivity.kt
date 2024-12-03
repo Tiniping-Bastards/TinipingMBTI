@@ -16,34 +16,36 @@ class ResultActivity : AppCompatActivity() {
     private var cursor: Cursor? = null
     private lateinit var dbHelper: DBHelper
 
+    private var tinipingSoundId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            binding = ActivityResultBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+        super.onCreate(savedInstanceState)
+        binding = ActivityResultBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-            dbHelper = DBHelper(this)
+        dbHelper = DBHelper(this)
 
-            val result = intent.getStringExtra("RESULT")
-            val scrollView = findViewById<ScrollView>(R.id.scrollView)
-            val shareButton = findViewById<Button>(R.id.shareButton)
+        val result = intent.getStringExtra("RESULT")
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        val shareButton = findViewById<Button>(R.id.shareButton)
 
 
-            cursor = dbHelper.loadDatabase().query(
-                "result",
-                arrayOf("type","description", "path", "name", "fits", "unfits",
-                        "fitsname", "unfitsname","oneline", "desc", "sound"),  // 가져올 컬럼
-                "type = ?",
-                arrayOf(result),
-                null,
-                null,
-                null
-            )
+        cursor = dbHelper.loadDatabase().query(
+            "result",
+            arrayOf("type","description", "path", "name", "fits", "unfits",
+                    "fitsname", "unfitsname","oneline", "desc", "sound"),  // 가져올 컬럼
+            "type = ?",
+            arrayOf(result),
+            null,
+            null,
+            null
+        )
 
-            val shareHelper = ShareHelper(
-                context = this,
-                scrollView = scrollView,
-                authority = "${packageName}.fileprovider"
-            )
+        val shareHelper = ShareHelper(
+            context = this,
+            scrollView = scrollView,
+            authority = "${packageName}.fileprovider"
+        )
 
         // DB에서 결과값 가져오고 보여주기
         if (cursor != null && cursor?.moveToFirst() == true) {
@@ -64,14 +66,14 @@ class ResultActivity : AppCompatActivity() {
             val imageResourceId = resources.getIdentifier(imageName, "drawable", packageName)
             val imageResourceId2 = resources.getIdentifier(imageFits, "drawable", packageName)
             val imageResourceId3 = resources.getIdentifier(imageUnFits, "drawable", packageName)
-            val tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
+
+            tinipingSoundId = resources.getIdentifier(tinipingSound, "raw", packageName)
 
             if (tinipingSoundId != 0) {
                 TinipingApplication.bgmManager.play(tinipingSoundId)
             } else {
                 Toast.makeText(this, "데이터를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
-
 
             if (imageResourceId != 0 && imageResourceId2 != 0 && imageResourceId3 != 0) {
                 binding.mbtiImage.setImageResource(imageResourceId)
@@ -89,12 +91,9 @@ class ResultActivity : AppCompatActivity() {
         cursor?.close()
 
 
-
         // 다시하기
         val retryButton = findViewById<Button>(R.id.returnButton)
         retryButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
 
             TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
@@ -106,5 +105,11 @@ class ResultActivity : AppCompatActivity() {
 
             TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        TinipingApplication.bgmManager.pause(tinipingSoundId)
     }
 }

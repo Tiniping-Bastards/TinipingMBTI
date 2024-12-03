@@ -89,6 +89,7 @@ class SplashResultActivity : AppCompatActivity() {
             timer.schedule(timerTask, 0, 50)
         }
 
+        bgmManager.setVolume(R.raw.tiniping_100, 0.2f)
     }
     override fun onDestroy() {
         super.onDestroy()
