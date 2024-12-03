@@ -131,13 +131,13 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun applyAnimations() {
-        val click: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani)
+        val click: Animation = AnimationUtils.loadAnimation(this, R.anim.click_ani)
+        val click1: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani)
+        val click2: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani2)
 
-        binding.btnAnswer1.startAnimation(click)
-        binding.btnAnswer2.startAnimation(click)
-        binding.progressBar.startAnimation(click)
         binding.tvQuestion.startAnimation(click)
-        binding.tvQuestionNumber.startAnimation(click)
+        binding.btnAnswer1.startAnimation(click1)
+        binding.btnAnswer2.startAnimation(click2)
     }
 
 
