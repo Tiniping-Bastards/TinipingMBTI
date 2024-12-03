@@ -34,10 +34,11 @@
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="189dp"
-            android:layout_height="33dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:max="100"
-            android:progress="0" />
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_bar" />
 
         <TextView
             android:id="@+id/tvQuestion"
@@ -52,17 +53,21 @@
         <Button
             android:id="@+id/btnAnswer1"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:layout_marginBottom="20dp"
             android:textSize="21sp"
-            android:text="답변 1" />
+            android:background="@drawable/button_shape"
+            android:text="답변 1"
+            android:textColor="@drawable/button_text_color"/>
 
         <Button
             android:id="@+id/btnAnswer2"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="54dp"
             android:textSize="21sp"
-            android:text="답변 2" />
+            android:background="@drawable/button_shape"
+            android:text="답변 2"
+            android:textColor="@drawable/button_text_color"/>
 
     </LinearLayout>
 
