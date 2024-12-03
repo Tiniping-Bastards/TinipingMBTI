@@ -11,7 +11,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background4"
+        android:background="@drawable/b3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/navi"
                 android:text="티니핑"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
@@ -146,7 +146,8 @@
                         android:gravity="center"
                         android:text="티니핑"
                         android:textSize="28dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="#d4d4d4"/>
 
                 </LinearLayout>
 
@@ -182,7 +183,8 @@
                         android:gravity="center"
                         android:text="티니핑"
                         android:textSize="28dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="#d4d4d4"/>
 
                 </LinearLayout>
 
@@ -198,7 +200,8 @@
                 android:background="@drawable/button_shape"
                 android:fontFamily="@font/navi"
                 android:text="다시하기"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="#ffffff"/>
 
             <Button
                 android:id="@+id/shareButton"
@@ -209,7 +212,8 @@
                 android:background="@drawable/button_shape"
                 android:fontFamily="@font/navi"
                 android:text="공유하기"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="#ffffff"/>
 
         </LinearLayout>
     </ScrollView>

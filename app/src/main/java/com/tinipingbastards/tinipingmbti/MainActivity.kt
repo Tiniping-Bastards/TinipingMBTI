@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         binding.startBtn.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_start_show))
 
         // 브금 볼륨 키우기
-        bgmManager.setVolume(R.raw.tiniping_100, 0.8f)
+        bgmManager.setVolume(R.raw.tiniping_100, 0.5f)
     }
 
     override fun onPause() {

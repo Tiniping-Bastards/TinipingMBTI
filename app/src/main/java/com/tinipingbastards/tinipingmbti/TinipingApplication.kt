@@ -18,6 +18,7 @@ class TinipingApplication : Application() {
         bgmManager = BGMManager(this, packageName)
         sfxHandler = SFXManager(baseContext)
 
+        sfxHandler.loadSFX(R.raw.activity_changed)
         sfxHandler.loadSFX(R.raw.button_click)
         sfxHandler.loadSFX(R.raw.tiniping_signature)
     }
