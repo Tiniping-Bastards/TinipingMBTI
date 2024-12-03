@@ -93,7 +93,7 @@ class QuestionActivity : AppCompatActivity() {
 
     private fun updateProgressBar() {
         val totalQuestions = 12
-        val progress = ((currentQuestionIndex + 1) * 100) / totalQuestions
+        val progress = ((currentQuestionIndex ) * 100) / totalQuestions
         progressBar.progress = progress
     }
 
