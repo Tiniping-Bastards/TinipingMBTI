@@ -4,19 +4,12 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.tinipingbastards.tinipingmbti.DBHelper  // DBHelper 클래스 경로
-import com.tinipingbastards.tinipingmbti.databinding.ActivityMainBinding
 import com.tinipingbastards.tinipingmbti.databinding.ActivityQuestionBinding
 
 class QuestionActivity : AppCompatActivity() {
@@ -131,9 +124,9 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun applyAnimations() {
-        val click: Animation = AnimationUtils.loadAnimation(this, R.anim.click_ani)
-        val click1: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani)
-        val click2: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani2)
+        val click: Animation = AnimationUtils.loadAnimation(this, R.anim.question_text)
+        val click1: Animation = AnimationUtils.loadAnimation(this, R.anim.question_btn1_show)
+        val click2: Animation = AnimationUtils.loadAnimation(this, R.anim.question_btn2_show)
 
         binding.tvQuestion.startAnimation(click)
         binding.btnAnswer1.startAnimation(click1)
