@@ -123,7 +123,7 @@ class QuestionActivity : AppCompatActivity() {
             result = calculateResult()
 
 
-            val intent = Intent(this, ResultActivity::class.java)
+            val intent = Intent(this, SplashResultActivity::class.java)
             intent.putExtra("RESULT", result)
             startActivity(intent)
 
