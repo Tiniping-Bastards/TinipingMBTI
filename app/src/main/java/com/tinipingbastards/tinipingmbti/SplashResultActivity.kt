@@ -35,7 +35,7 @@ class SplashResultActivity : AppCompatActivity() {
             R.drawable.intj, R.drawable.intp, R.drawable.isfj, R.drawable.isfp, R.drawable.istj, R.drawable.istp
         )
 
-        imageHandler = ImageHandler(binding.changImage, imageList, 160L)
+        imageHandler = ImageHandler(binding.changImage, imageList, 60L)
         imageHandler.start()
 
         cursor = dbHelper.loadDatabase().query(

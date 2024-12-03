@@ -7,7 +7,7 @@ import android.widget.ImageView
 class ImageHandler(
     private val imageView: ImageView,
     private val imageList: List<Int>,
-    private val interval: Long = 160L // 이미지 변경 간격 (기본값: 1초)
+    private val interval: Long = 60L
 ) {
     private val handler = Handler(Looper.getMainLooper())
     private var currentImageIndex = 0
