@@ -22,16 +22,7 @@ class IntroActivity : AppCompatActivity() {
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 인트로 비디오 재생
         binding.videoView.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.intro_video))
-        binding.videoView.start()
-
-        // 인트로 브금 재생
-        bgmManager.play(R.raw.intro_bgm)
-        bgmManager.play(R.raw.tiniping_100)
-
-        // Skip 텍스트 3초 뒤에 활성화
-        binding.skipText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.intro_skip_show))
 
         // 인트로 비디오 누르면 메인화면으로 이동
         binding.videoView.setOnClickListener {
@@ -46,16 +37,41 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        // 동영상 처음부터
+        binding.videoView.seekTo(0)
+        binding.videoView.start()
+
+        // 브금재생
+        bgmManager.seekTo(R.raw.intro_bgm,0)
+        bgmManager.setVolume(R.raw.intro_bgm, 1.0f)
+        bgmManager.play(R.raw.intro_bgm)
+
+        bgmManager.seekTo(R.raw.tiniping_100, 0)
+        bgmManager.setVolume(R.raw.tiniping_100, 0.4f)
+        bgmManager.play(R.raw.tiniping_100)
+
+        // Skip 텍스트 3초 뒤에 활성화
+        binding.skipText.startAnimation(AnimationUtils.loadAnimation(this, R.anim.intro_skip_show))
+    }
+
     override fun onPause() {
         super.onPause()
 
+        // 동영상 멈추기
         binding.videoView.pause()
         bgmManager.pause(R.raw.intro_bgm)
 
         if (Build.VERSION.SDK_INT >= 34) {
-            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.none, R.anim.activity_intro_end)
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, 0, 0)
         } else {
-            overridePendingTransition(R.anim.none, R.anim.activity_intro_end)
+            overridePendingTransition(0, 0)
         }
     }
+
+
+
+
 }

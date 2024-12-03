@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         // 시그니처 사운드 재생
         sfxHandler.playSFX(R.raw.tiniping_signature)
@@ -54,15 +58,18 @@ class MainActivity : AppCompatActivity() {
         binding.logo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_logo_show))
         binding.startBtn.startAnimation(AnimationUtils.loadAnimation(this, R.anim.main_start_show))
 
+        // 브금 볼륨 키우기
+        bgmManager.setVolume(R.raw.tiniping_100, 0.8f)
     }
 
     override fun onPause() {
         super.onPause()
 
+        //
         if (Build.VERSION.SDK_INT >= 34) {
-            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_OPEN, R.anim.slide_in_right, R.anim.slide_out_left)
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.slide_in_right, R.anim.none)
         } else {
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.none)
         }
     }
 }

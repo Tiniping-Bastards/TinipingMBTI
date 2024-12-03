@@ -2,6 +2,7 @@ package com.tinipingbastards.tinipingmbti
 
 import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import org.checkerframework.checker.units.qual.h
 
 
@@ -14,8 +15,7 @@ class TinipingApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        bgmManager = BGMManager(baseContext, packageName)
-
+        bgmManager = BGMManager(this, packageName)
         sfxHandler = SFXManager(baseContext)
 
         sfxHandler.loadSFX(R.raw.button_click)
