@@ -4,6 +4,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -45,8 +50,6 @@ class QuestionActivity : AppCompatActivity() {
 
         questionNumberTextView = binding.tvQuestionNumber
 
-        //val progressColor = resources.getColor(R.color.green, null)
-        //binding.progressBar.indeterminateDrawable.setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN)
 
         val customFont: Typeface? = ResourcesCompat.getFont(this, R.font.navi)
         binding.tvQuestion.typeface = customFont
@@ -70,11 +73,13 @@ class QuestionActivity : AppCompatActivity() {
 
         binding.btnAnswer1.setOnClickListener {
             TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+            applyAnimations()
             processAnswer(1)
         }
 
         binding.btnAnswer2.setOnClickListener {
             TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+            applyAnimations()
             processAnswer(2)
         }
     }
@@ -114,19 +119,28 @@ class QuestionActivity : AppCompatActivity() {
 
         if (cursor?.moveToNext() == true) {
             updateUI()
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         } else {
-            result = calculateResult()  // 결과를 계산하여 result에 저장
+            result = calculateResult()
 
-            //Toast.makeText(this, result, Toast.LENGTH_LONG).show()
 
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra("RESULT", result)
             startActivity(intent)
 
-            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         }
     }
+
+    private fun applyAnimations() {
+        val click: Animation = AnimationUtils.loadAnimation(this, R.anim.button_click_ani)
+
+        binding.btnAnswer1.startAnimation(click)
+        binding.btnAnswer2.startAnimation(click)
+        binding.progressBar.startAnimation(click)
+        binding.tvQuestion.startAnimation(click)
+        binding.tvQuestionNumber.startAnimation(click)
+    }
+
+
     private fun calculateAnswerResult(questionNumber: Int, selectedOption: Int) {
         // 각 질문에 해당하는 타입을 설정
         when (questionNumber) {
