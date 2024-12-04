@@ -120,10 +120,12 @@ class ResultActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        binding.title.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
-        binding.mbti.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
-        binding.name.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
-        binding.oneLine.startAnimation((AnimationUtils.loadAnimation(this,R.anim.result_text)))
+        binding.title.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text_show1))
+        binding.mbti.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text_show1))
+        binding.mbtiImage.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text_show2))
+        binding.name.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text_show2))
+        binding.oneLine.startAnimation((AnimationUtils.loadAnimation(this,R.anim.result_text_show3)))
+        binding.desc.startAnimation((AnimationUtils.loadAnimation(this,R.anim.result_text_show3)))
     }
 
     override fun onPause() {
