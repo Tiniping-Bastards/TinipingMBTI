@@ -112,6 +112,7 @@ class QuestionActivity : AppCompatActivity() {
 
         if (cursor?.moveToNext() == true) {
             updateUI()
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         } else {
             result = calculateResult()
 
@@ -120,6 +121,7 @@ class QuestionActivity : AppCompatActivity() {
             intent.putExtra("RESULT", result)
             startActivity(intent)
 
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
         }
     }
 
