@@ -26,13 +26,13 @@ class CreditActivity : AppCompatActivity() {
         // 서지훈
         binding.sjh.imageView.setImageResource(R.drawable.enfp)
         binding.sjh.nameText.text = "서지훈"
-        binding.sjh.messageText.text = "울라울라"
+        binding.sjh.messageText.text = "즐거웠고 다시 보지 말자 티니핑~"
         binding.sjh.roleText.text = "질문창 | DB"
 
         // 민주원
         binding.mjw.imageView.setImageResource(R.drawable.istp)
         binding.mjw.nameText.text = "민주원"
-        binding.mjw.messageText.text = "차나차나"
+        binding.mjw.messageText.text = "아휴~"
         binding.mjw.roleText.text = "결과창 | 공유기능"
     }
 }
