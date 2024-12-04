@@ -7,7 +7,7 @@ import android.widget.ImageView
 class ImageHandler(
     private val imageView: ImageView,
     private val imageList: List<Int>,
-    private val interval: Long = 60L
+    private val interval: Long = 100L
 ) {
     private val handler = Handler(Looper.getMainLooper())
     private var currentImageIndex = 0

@@ -1,8 +1,11 @@
 package com.tinipingbastards.tinipingmbti
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ScrollView
 import android.widget.Toast
@@ -97,21 +100,30 @@ class ResultActivity : AppCompatActivity() {
 
         cursor?.close()
 
-
         // 다시하기
         val retryButton = findViewById<Button>(R.id.returnButton)
         retryButton.setOnClickListener {
             finish()
 
-            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+           sfxHandler.playSFX(R.raw.button_click)
         }
 
         // 공유하기
         shareButton.setOnClickListener {
             shareHelper.captureAndShare()
 
-            TinipingApplication.sfxHandler.playSFX(R.raw.button_click)
+            sfxHandler.playSFX(R.raw.button_click)
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.title.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
+        binding.mbti.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
+        binding.name.startAnimation(AnimationUtils.loadAnimation(this,R.anim.result_text))
+        binding.oneLine.startAnimation((AnimationUtils.loadAnimation(this,R.anim.result_text)))
     }
 
     override fun onPause() {

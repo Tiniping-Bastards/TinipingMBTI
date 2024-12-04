@@ -93,14 +93,12 @@ class SplashResultActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 
-        // 화면전환 엑티비티
         if (Build.VERSION.SDK_INT >= 34) {
-            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, R.anim.slide_in_right, R.anim.none)
+            overrideActivityTransition(Activity.OVERRIDE_TRANSITION_CLOSE, 0, 0)
         } else {
-            overridePendingTransition(R.anim.slide_in_right, R.anim.none)
+            overridePendingTransition(0, 0)
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         imageHandler.stop()
